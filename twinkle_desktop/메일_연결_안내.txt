@@ -1,0 +1,16 @@
+Twinkle Agent · Optional mail / 선택 메일 연결
+
+공개본에는 계정·Google/Microsoft 앱 등록 값이 포함되어 있지 않습니다.
+Gmail / Outlook: app_config/README.txt의 본인 앱 등록을 먼저 준비하세요.
+네이버: 메일 환경설정에서 IMAP을 켜고 이메일 주소와 앱 비밀번호로 연결합니다.
+Naver: enable IMAP and use an app password. Do not use or share your normal password.
+IMAP: use your provider's TLS IMAP server settings and app password.
+
+Metadata only: the app does not read bodies or attachments, send or delete mail, or mark mail read.
+첫 연결과 알림 재활성화 시 기존 메일은 알리지 않습니다. 이후 약 60초마다 확인합니다.
+Accounts you connect later are encrypted for the current Windows user in user_mail/accounts.dat.
+실제 공급자 계정의 로그인·수신 확인은 공개본 검증에 포함되지 않았습니다.
+
+Gmail app registration: https://developers.google.com/identity/protocols/oauth2/native-app
+Microsoft app registration: https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app
+Naver app password: https://help.naver.com/service/5640/contents/8584?lang=ko&osType=COMMONOS

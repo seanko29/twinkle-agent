@@ -1,0 +1,8 @@
+Twinkle Agent 0.8.0 · KOR / ENG
+
+캐릭터 우클릭 → 사용법 / Guide (KOR · ENG)
+KOR 또는 ENG 버튼으로 언어를 전환할 수 있습니다.
+Click the character's right-click menu → 사용법 / Guide (KOR · ENG).
+The guide and gallery work offline; the desktop UI currently uses Korean labels.
+
+Source checkout: open ../index.html. Packaged app: open guide/index.html.

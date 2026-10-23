@@ -1,0 +1,94 @@
+{
+  "id": "we_are_23",
+  "title_ko": "졸림 · 하품",
+  "original": "original.gif",
+  "poster": "preview.png",
+  "spritesheet": "spritesheet.png",
+  "frame_width": 240,
+  "frame_height": 240,
+  "columns": 3,
+  "rows": 3,
+  "frame_count": 8,
+  "duration_ms": 2100.0,
+  "source_loop": 0,
+  "variable_frame_timing": true,
+  "default_image": false,
+  "frames": [
+    {
+      "index": 0,
+      "file": "frames/frame_000.png",
+      "x": 0,
+      "y": 0,
+      "width": 240,
+      "height": 240,
+      "duration_ms": 200.0
+    },
+    {
+      "index": 1,
+      "file": "frames/frame_001.png",
+      "x": 240,
+      "y": 0,
+      "width": 240,
+      "height": 240,
+      "duration_ms": 100.0
+    },
+    {
+      "index": 2,
+      "file": "frames/frame_002.png",
+      "x": 480,
+      "y": 0,
+      "width": 240,
+      "height": 240,
+      "duration_ms": 100.0
+    },
+    {
+      "index": 3,
+      "file": "frames/frame_003.png",
+      "x": 0,
+      "y": 240,
+      "width": 240,
+      "height": 240,
+      "duration_ms": 500.0
+    },
+    {
+      "index": 4,
+      "file": "frames/frame_004.png",
+      "x": 240,
+      "y": 240,
+      "width": 240,
+      "height": 240,
+      "duration_ms": 0.0
+    },
+    {
+      "index": 5,
+      "file": "frames/frame_005.png",
+      "x": 480,
+      "y": 240,
+      "width": 240,
+      "height": 240,
+      "duration_ms": 0.0
+    },
+    {
+      "index": 6,
+      "file": "frames/frame_006.png",
+      "x": 0,
+      "y": 480,
+      "width": 240,
+      "height": 240,
+      "duration_ms": 200.0
+    },
+    {
+      "index": 7,
+      "file": "frames/frame_007.png",
+      "x": 240,
+      "y": 480,
+      "width": 240,
+      "height": 240,
+      "duration_ms": 1000.0
+    }
+  ],
+  "source_page": "https://www.sigstick.com/pack/6P5rlqB6ERkPgukuxZvx",
+  "image_url": "https://cdn2.cdnstep.com/6P5rlqB6ERkPgukuxZvx/15-1.png",
+  "original_sha256": "cdce218bbb8cabd861e09c16676191271ea1254475f27e8fdef40c6db73b5438",
+  "source_format": "GIF"
+}

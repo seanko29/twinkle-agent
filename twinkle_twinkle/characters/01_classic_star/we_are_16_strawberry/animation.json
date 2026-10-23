@@ -1,0 +1,373 @@
+{
+  "id": "we_are_16",
+  "title_ko": "딸기 · 머리 콩",
+  "original": "original.png",
+  "poster": "preview.png",
+  "spritesheet": "spritesheet.png",
+  "frame_width": 285,
+  "frame_height": 285,
+  "columns": 7,
+  "rows": 6,
+  "frame_count": 39,
+  "duration_ms": 3000.0000000000005,
+  "source_loop": 0,
+  "variable_frame_timing": false,
+  "default_image": false,
+  "frames": [
+    {
+      "index": 0,
+      "file": "frames/frame_000.png",
+      "x": 0,
+      "y": 0,
+      "width": 285,
+      "height": 285,
+      "duration_ms": 76.92307692307693
+    },
+    {
+      "index": 1,
+      "file": "frames/frame_001.png",
+      "x": 285,
+      "y": 0,
+      "width": 285,
+      "height": 285,
+      "duration_ms": 76.92307692307693
+    },
+    {
+      "index": 2,
+      "file": "frames/frame_002.png",
+      "x": 570,
+      "y": 0,
+      "width": 285,
+      "height": 285,
+      "duration_ms": 76.92307692307693
+    },
+    {
+      "index": 3,
+      "file": "frames/frame_003.png",
+      "x": 855,
+      "y": 0,
+      "width": 285,
+      "height": 285,
+      "duration_ms": 76.92307692307693
+    },
+    {
+      "index": 4,
+      "file": "frames/frame_004.png",
+      "x": 1140,
+      "y": 0,
+      "width": 285,
+      "height": 285,
+      "duration_ms": 76.92307692307693
+    },
+    {
+      "index": 5,
+      "file": "frames/frame_005.png",
+      "x": 1425,
+      "y": 0,
+      "width": 285,
+      "height": 285,
+      "duration_ms": 76.92307692307693
+    },
+    {
+      "index": 6,
+      "file": "frames/frame_006.png",
+      "x": 1710,
+      "y": 0,
+      "width": 285,
+      "height": 285,
+      "duration_ms": 76.92307692307693
+    },
+    {
+      "index": 7,
+      "file": "frames/frame_007.png",
+      "x": 0,
+      "y": 285,
+      "width": 285,
+      "height": 285,
+      "duration_ms": 76.92307692307693
+    },
+    {
+      "index": 8,
+      "file": "frames/frame_008.png",
+      "x": 285,
+      "y": 285,
+      "width": 285,
+      "height": 285,
+      "duration_ms": 76.92307692307693
+    },
+    {
+      "index": 9,
+      "file": "frames/frame_009.png",
+      "x": 570,
+      "y": 285,
+      "width": 285,
+      "height": 285,
+      "duration_ms": 76.92307692307693
+    },
+    {
+      "index": 10,
+      "file": "frames/frame_010.png",
+      "x": 855,
+      "y": 285,
+      "width": 285,
+      "height": 285,
+      "duration_ms": 76.92307692307693
+    },
+    {
+      "index": 11,
+      "file": "frames/frame_011.png",
+      "x": 1140,
+      "y": 285,
+      "width": 285,
+      "height": 285,
+      "duration_ms": 76.92307692307693
+    },
+    {
+      "index": 12,
+      "file": "frames/frame_012.png",
+      "x": 1425,
+      "y": 285,
+      "width": 285,
+      "height": 285,
+      "duration_ms": 76.92307692307693
+    },
+    {
+      "index": 13,
+      "file": "frames/frame_013.png",
+      "x": 1710,
+      "y": 285,
+      "width": 285,
+      "height": 285,
+      "duration_ms": 76.92307692307693
+    },
+    {
+      "index": 14,
+      "file": "frames/frame_014.png",
+      "x": 0,
+      "y": 570,
+      "width": 285,
+      "height": 285,
+      "duration_ms": 76.92307692307693
+    },
+    {
+      "index": 15,
+      "file": "frames/frame_015.png",
+      "x": 285,
+      "y": 570,
+      "width": 285,
+      "height": 285,
+      "duration_ms": 76.92307692307693
+    },
+    {
+      "index": 16,
+      "file": "frames/frame_016.png",
+      "x": 570,
+      "y": 570,
+      "width": 285,
+      "height": 285,
+      "duration_ms": 76.92307692307693
+    },
+    {
+      "index": 17,
+      "file": "frames/frame_017.png",
+      "x": 855,
+      "y": 570,
+      "width": 285,
+      "height": 285,
+      "duration_ms": 76.92307692307693
+    },
+    {
+      "index": 18,
+      "file": "frames/frame_018.png",
+      "x": 1140,
+      "y": 570,
+      "width": 285,
+      "height": 285,
+      "duration_ms": 76.92307692307693
+    },
+    {
+      "index": 19,
+      "file": "frames/frame_019.png",
+      "x": 1425,
+      "y": 570,
+      "width": 285,
+      "height": 285,
+      "duration_ms": 76.92307692307693
+    },
+    {
+      "index": 20,
+      "file": "frames/frame_020.png",
+      "x": 1710,
+      "y": 570,
+      "width": 285,
+      "height": 285,
+      "duration_ms": 76.92307692307693
+    },
+    {
+      "index": 21,
+      "file": "frames/frame_021.png",
+      "x": 0,
+      "y": 855,
+      "width": 285,
+      "height": 285,
+      "duration_ms": 76.92307692307693
+    },
+    {
+      "index": 22,
+      "file": "frames/frame_022.png",
+      "x": 285,
+      "y": 855,
+      "width": 285,
+      "height": 285,
+      "duration_ms": 76.92307692307693
+    },
+    {
+      "index": 23,
+      "file": "frames/frame_023.png",
+      "x": 570,
+      "y": 855,
+      "width": 285,
+      "height": 285,
+      "duration_ms": 76.92307692307693
+    },
+    {
+      "index": 24,
+      "file": "frames/frame_024.png",
+      "x": 855,
+      "y": 855,
+      "width": 285,
+      "height": 285,
+      "duration_ms": 76.92307692307693
+    },
+    {
+      "index": 25,
+      "file": "frames/frame_025.png",
+      "x": 1140,
+      "y": 855,
+      "width": 285,
+      "height": 285,
+      "duration_ms": 76.92307692307693
+    },
+    {
+      "index": 26,
+      "file": "frames/frame_026.png",
+      "x": 1425,
+      "y": 855,
+      "width": 285,
+      "height": 285,
+      "duration_ms": 76.92307692307693
+    },
+    {
+      "index": 27,
+      "file": "frames/frame_027.png",
+      "x": 1710,
+      "y": 855,
+      "width": 285,
+      "height": 285,
+      "duration_ms": 76.92307692307693
+    },
+    {
+      "index": 28,
+      "file": "frames/frame_028.png",
+      "x": 0,
+      "y": 1140,
+      "width": 285,
+      "height": 285,
+      "duration_ms": 76.92307692307693
+    },
+    {
+      "index": 29,
+      "file": "frames/frame_029.png",
+      "x": 285,
+      "y": 1140,
+      "width": 285,
+      "height": 285,
+      "duration_ms": 76.92307692307693
+    },
+    {
+      "index": 30,
+      "file": "frames/frame_030.png",
+      "x": 570,
+      "y": 1140,
+      "width": 285,
+      "height": 285,
+      "duration_ms": 76.92307692307693
+    },
+    {
+      "index": 31,
+      "file": "frames/frame_031.png",
+      "x": 855,
+      "y": 1140,
+      "width": 285,
+      "height": 285,
+      "duration_ms": 76.92307692307693
+    },
+    {
+      "index": 32,
+      "file": "frames/frame_032.png",
+      "x": 1140,
+      "y": 1140,
+      "width": 285,
+      "height": 285,
+      "duration_ms": 76.92307692307693
+    },
+    {
+      "index": 33,
+      "file": "frames/frame_033.png",
+      "x": 1425,
+      "y": 1140,
+      "width": 285,
+      "height": 285,
+      "duration_ms": 76.92307692307693
+    },
+    {
+      "index": 34,
+      "file": "frames/frame_034.png",
+      "x": 1710,
+      "y": 1140,
+      "width": 285,
+      "height": 285,
+      "duration_ms": 76.92307692307693
+    },
+    {
+      "index": 35,
+      "file": "frames/frame_035.png",
+      "x": 0,
+      "y": 1425,
+      "width": 285,
+      "height": 285,
+      "duration_ms": 76.92307692307693
+    },
+    {
+      "index": 36,
+      "file": "frames/frame_036.png",
+      "x": 285,
+      "y": 1425,
+      "width": 285,
+      "height": 285,
+      "duration_ms": 76.92307692307693
+    },
+    {
+      "index": 37,
+      "file": "frames/frame_037.png",
+      "x": 570,
+      "y": 1425,
+      "width": 285,
+      "height": 285,
+      "duration_ms": 76.92307692307693
+    },
+    {
+      "index": 38,
+      "file": "frames/frame_038.png",
+      "x": 855,
+      "y": 1425,
+      "width": 285,
+      "height": 285,
+      "duration_ms": 76.92307692307693
+    }
+  ],
+  "source_page": "https://www.sigstick.com/pack/6P5rlqB6ERkPgukuxZvx",
+  "image_url": "https://cdn2.cdnstep.com/6P5rlqB6ERkPgukuxZvx/15-2.png",
+  "original_sha256": "dba59670b525a30582a87170f3155dfefd0642737c373ef167901d5e203ad738",
+  "source_format": "APNG"
+}

@@ -1,0 +1,40 @@
+{
+  "id": "we_are_01",
+  "title_ko": "신나서 들썩",
+  "original": "original.gif",
+  "poster": "preview.png",
+  "spritesheet": "spritesheet.png",
+  "frame_width": 240,
+  "frame_height": 240,
+  "columns": 2,
+  "rows": 1,
+  "frame_count": 2,
+  "duration_ms": 200.0,
+  "source_loop": 0,
+  "variable_frame_timing": false,
+  "default_image": false,
+  "frames": [
+    {
+      "index": 0,
+      "file": "frames/frame_000.png",
+      "x": 0,
+      "y": 0,
+      "width": 240,
+      "height": 240,
+      "duration_ms": 100.0
+    },
+    {
+      "index": 1,
+      "file": "frames/frame_001.png",
+      "x": 240,
+      "y": 0,
+      "width": 240,
+      "height": 240,
+      "duration_ms": 100.0
+    }
+  ],
+  "source_page": "https://www.sigstick.com/pack/6P5rlqB6ERkPgukuxZvx",
+  "image_url": "https://cdn2.cdnstep.com/6P5rlqB6ERkPgukuxZvx/0-1.png",
+  "original_sha256": "5d6f0b881128030ffd3dcb9d7ba6709986b8660365c2ecf2bbe4ec716052374d",
+  "source_format": "GIF"
+}

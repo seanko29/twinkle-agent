@@ -1,0 +1,16 @@
+Twinkle Agent · Optional notifications / 선택 알림
+
+AI API connections and mail summarization are not implemented. No API keys or service accounts are included.
+GPT·Claude·Gemini 메일 요약은 아직 구현되지 않았으며 API 키는 포함하지 않습니다.
+
+Chrome / Edge web-response notifications:
+1. Run install_browser_bridge.ps1 in the app folder (or select the optional browser-bridge installer task).
+2. Open chrome://extensions or edge://extensions and enable Developer mode.
+3. Load the browser_extension folder as an unpacked extension.
+4. Open its popup, explicitly enable detection, and click the connection test. Refresh existing AI tabs.
+Only a completion signal is sent to the local pet. Chat content and API keys are not read or transmitted.
+Detection depends on site UI; errors, manual stops, and long intermediate pauses can be misclassified. Live authenticated providers have not been verified. Native AI desktop apps are not detected.
+
+Local workflows: notify.ps1 / integrations/notify.py can send a signal after your own workflow actually completes.
+No network listener or external AI model call is provided by that local bridge.
+우클릭 → 사용법 / Guide (KOR · ENG)에서 두 언어 안내를 볼 수 있습니다.

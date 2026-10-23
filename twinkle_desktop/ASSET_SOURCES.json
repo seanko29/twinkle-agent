@@ -1,0 +1,54 @@
+{
+  "source_library": "../twinkle_twinkle",
+  "ai_image_generation_used": false,
+  "processing": "source frame resampling; mesh deformation limited to feet; mirroring; sprite packing",
+  "activity_map": {
+    "walk": "base_15 frame_001: 딸기 모자, 작은 발걸음",
+    "farewell": "daily_01: 커튼 뒤 빼꼼, 원본 배경 유지",
+    "focus": "base_14: 두 별 응원",
+    "rest": "base_01: 졸림 · 하품",
+    "meeting": "base_03: 갸우뚱 · 의아함"
+  },
+  "sources": [
+    {
+      "id": "base_15",
+      "source_page": "https://www.sigstick.com/pack/E9yM3xJpBqLCntxdNabW",
+      "image_url": "https://cdn2.cdnstep.com/E9yM3xJpBqLCntxdNabW/14-1.png",
+      "sha256": "e4b15f66212aec0f9f58ddb3c2b9d261f07cdb386eb20e350dd4ecd4c33cf38e",
+      "uploader_label": "Pop Mart",
+      "source_status": "third_party_upload; official provenance unverified"
+    },
+    {
+      "id": "daily_01",
+      "source_page": "https://www.sigstick.com/pack/7wp5PXlUHRos2f3Blrjz",
+      "image_url": "https://cdn2.cdnstep.com/7wp5PXlUHRos2f3Blrjz/0-1.png",
+      "sha256": "3570272910960ea1a9b9bcc9ca2c1be565d76303e5ee563b6ab9f6379dd47a04",
+      "uploader_label": "kal (we-Twinkle Twinkle星星人-shiroMARU)",
+      "source_status": "third_party_upload; official provenance unverified"
+    },
+    {
+      "id": "base_14",
+      "source_page": "https://www.sigstick.com/pack/E9yM3xJpBqLCntxdNabW",
+      "image_url": "https://cdn2.cdnstep.com/E9yM3xJpBqLCntxdNabW/13-1.png",
+      "sha256": "c3e86b8bd47b39107db354d6d6a16d6e575f081f488b565d995e7ae72e99cc63",
+      "uploader_label": "Pop Mart",
+      "source_status": "third_party_upload; official provenance unverified"
+    },
+    {
+      "id": "base_01",
+      "source_page": "https://www.sigstick.com/pack/E9yM3xJpBqLCntxdNabW",
+      "image_url": "https://cdn2.cdnstep.com/E9yM3xJpBqLCntxdNabW/0-1.png",
+      "sha256": "349fd048a2461952524aa0183fb254be48824a182dc7241d2ea14979f1f414bd",
+      "uploader_label": "Pop Mart",
+      "source_status": "third_party_upload; official provenance unverified"
+    },
+    {
+      "id": "base_03",
+      "source_page": "https://www.sigstick.com/pack/E9yM3xJpBqLCntxdNabW",
+      "image_url": "https://cdn2.cdnstep.com/E9yM3xJpBqLCntxdNabW/2-1.png",
+      "sha256": "ab40dceb0ade7ba3ddf69d0bae9714c461546f0a80cd3a8959003acff80ac61e",
+      "uploader_label": "Pop Mart",
+      "source_status": "third_party_upload; official provenance unverified"
+    }
+  ]
+}

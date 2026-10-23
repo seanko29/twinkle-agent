@@ -1,0 +1,34 @@
+트윙클트윙클 2D 이미지 조사 · 수집 계획
+조사일: 2026-10-22 (Asia/Seoul)
+요청: 새 이미지 생성 없이 공개 이미지 크롤링 → 캐릭터/모습별 폴더 저장.
+
+1. RESEARCH — 확인한 자료
+- POP MART 공식 컬렉션: https://www.popmart.com/us/collection/123/twinkle-twinkle
+  별 모양 몸과 붉은 얼굴을 가진 Twinkle Twinkle IP 확인.
+- POP MART 공식 소개 영상: https://www.youtube.com/watch?v=U4ZAaP6H-Nw
+- 2D 원본을 공개한 스티커 묶음 3종:
+  https://www.sigstick.com/pack/E9yM3xJpBqLCntxdNabW (15개)
+  https://www.sigstick.com/pack/6P5rlqB6ERkPgukuxZvx (24개)
+  https://www.sigstick.com/pack/7wp5PXlUHRos2f3Blrjz (8개)
+  SigStick은 제3자 업로드 플랫폼이다. 표시 작성자명은 원본 저작자/공식 계정 인증을 뜻하지 않는다.
+- 예시 페이지: https://topaz-eagle-4kgq.here.now/
+  화면 위 캐릭터 이동, 클릭 반응, 드래그, 캐릭터 선택 동작을 참고.
+- 예시 저장소: https://github.com/cheo0y/shisa-agent
+  assets/characters/usagi/video.json에서 상태별 PNG 포스터와 투명 애니메이션 파일,
+  재생시간/프레임 정보 구조를 확인. 해당 프로젝트의 캐릭터 파일은 수집하지 않았다.
+
+2. PLAN — 수집과 정리 기준
+- 상품 사진 대신, 얼굴/몸통이 그려진 2D 스티커 원본 우선.
+- HTML에 공개된 원본 URL만 다운로드. 로그인/유료/비공개 자료 사용 없음.
+- 원본 바이트 보존 후 파일 해시, 해상도, 프레임 수, 알파, 재생시간 검사.
+- 비슷한 동작의 저해상도/문구 포함 버전은 출처별로 보존하되, 대표 추천 15개를 별도 표시.
+- 파일 관리용 모습 분류: 기본 별, 수면모자, 곰모자, 무지개모자, 파티모자,
+  두 별, 세 별, 배경 포함 장면. 이 분류명은 공식 개별 캐릭터 이름이 아니다.
+- 합성/생성/배경제거/보간/리터칭 없이 원본 프레임만 PNG와 시트로 추출.
+
+3. 다음 제작에 필요한 것
+- 현재 수집본: 대기/눈 깜빡임 참고, 하품, 의아함, 웃음, 손 흔들기, 놀람,
+  울음, 낙담, 응원 등. 일상 카드에는 원래의 색 배경이 포함되어 있다.
+- 수집본에 전신 좌/우 걷기 순환 동작, 정면/후면 모델시트는 없다.
+- 화면 좌표 이동은 앱에서 구현할 수 있지만, 이것을 걷기 애니메이션으로 분류하지 않았다.
+- 먼저 전신 대표 동작으로 크기·발 위치를 맞추고, 걷기 상태용 추가 원화를 확보하는 순서가 적합하다.

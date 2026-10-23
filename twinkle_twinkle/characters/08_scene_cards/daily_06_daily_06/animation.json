@@ -1,0 +1,85 @@
+{
+  "id": "daily_06",
+  "title_ko": "일상 · 초롱초롱",
+  "original": "original.gif",
+  "poster": "preview.png",
+  "spritesheet": "spritesheet.png",
+  "frame_width": 240,
+  "frame_height": 240,
+  "columns": 3,
+  "rows": 3,
+  "frame_count": 7,
+  "duration_ms": 400.0,
+  "source_loop": 0,
+  "variable_frame_timing": true,
+  "default_image": false,
+  "frames": [
+    {
+      "index": 0,
+      "file": "frames/frame_000.png",
+      "x": 0,
+      "y": 0,
+      "width": 240,
+      "height": 240,
+      "duration_ms": 0.0
+    },
+    {
+      "index": 1,
+      "file": "frames/frame_001.png",
+      "x": 240,
+      "y": 0,
+      "width": 240,
+      "height": 240,
+      "duration_ms": 100.0
+    },
+    {
+      "index": 2,
+      "file": "frames/frame_002.png",
+      "x": 480,
+      "y": 0,
+      "width": 240,
+      "height": 240,
+      "duration_ms": 0.0
+    },
+    {
+      "index": 3,
+      "file": "frames/frame_003.png",
+      "x": 0,
+      "y": 240,
+      "width": 240,
+      "height": 240,
+      "duration_ms": 100.0
+    },
+    {
+      "index": 4,
+      "file": "frames/frame_004.png",
+      "x": 240,
+      "y": 240,
+      "width": 240,
+      "height": 240,
+      "duration_ms": 100.0
+    },
+    {
+      "index": 5,
+      "file": "frames/frame_005.png",
+      "x": 480,
+      "y": 240,
+      "width": 240,
+      "height": 240,
+      "duration_ms": 0.0
+    },
+    {
+      "index": 6,
+      "file": "frames/frame_006.png",
+      "x": 0,
+      "y": 480,
+      "width": 240,
+      "height": 240,
+      "duration_ms": 100.0
+    }
+  ],
+  "source_page": "https://www.sigstick.com/pack/7wp5PXlUHRos2f3Blrjz",
+  "image_url": "https://cdn2.cdnstep.com/7wp5PXlUHRos2f3Blrjz/5-1.png",
+  "original_sha256": "ea2f4c7204e073e6bc2bce99ec224a5ee1bf84981dbb7402d99a09e4cf1893b3",
+  "source_format": "GIF"
+}

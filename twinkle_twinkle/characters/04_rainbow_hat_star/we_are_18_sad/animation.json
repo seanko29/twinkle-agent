@@ -1,0 +1,310 @@
+{
+  "id": "we_are_18",
+  "title_ko": "무지개모자 · 낙담",
+  "original": "original.png",
+  "poster": "preview.png",
+  "spritesheet": "spritesheet.png",
+  "frame_width": 480,
+  "frame_height": 480,
+  "columns": 6,
+  "rows": 6,
+  "frame_count": 32,
+  "duration_ms": 1600.0,
+  "source_loop": 0,
+  "variable_frame_timing": false,
+  "default_image": false,
+  "frames": [
+    {
+      "index": 0,
+      "file": "frames/frame_000.png",
+      "x": 0,
+      "y": 0,
+      "width": 480,
+      "height": 480,
+      "duration_ms": 50.0
+    },
+    {
+      "index": 1,
+      "file": "frames/frame_001.png",
+      "x": 480,
+      "y": 0,
+      "width": 480,
+      "height": 480,
+      "duration_ms": 50.0
+    },
+    {
+      "index": 2,
+      "file": "frames/frame_002.png",
+      "x": 960,
+      "y": 0,
+      "width": 480,
+      "height": 480,
+      "duration_ms": 50.0
+    },
+    {
+      "index": 3,
+      "file": "frames/frame_003.png",
+      "x": 1440,
+      "y": 0,
+      "width": 480,
+      "height": 480,
+      "duration_ms": 50.0
+    },
+    {
+      "index": 4,
+      "file": "frames/frame_004.png",
+      "x": 1920,
+      "y": 0,
+      "width": 480,
+      "height": 480,
+      "duration_ms": 50.0
+    },
+    {
+      "index": 5,
+      "file": "frames/frame_005.png",
+      "x": 2400,
+      "y": 0,
+      "width": 480,
+      "height": 480,
+      "duration_ms": 50.0
+    },
+    {
+      "index": 6,
+      "file": "frames/frame_006.png",
+      "x": 0,
+      "y": 480,
+      "width": 480,
+      "height": 480,
+      "duration_ms": 50.0
+    },
+    {
+      "index": 7,
+      "file": "frames/frame_007.png",
+      "x": 480,
+      "y": 480,
+      "width": 480,
+      "height": 480,
+      "duration_ms": 50.0
+    },
+    {
+      "index": 8,
+      "file": "frames/frame_008.png",
+      "x": 960,
+      "y": 480,
+      "width": 480,
+      "height": 480,
+      "duration_ms": 50.0
+    },
+    {
+      "index": 9,
+      "file": "frames/frame_009.png",
+      "x": 1440,
+      "y": 480,
+      "width": 480,
+      "height": 480,
+      "duration_ms": 50.0
+    },
+    {
+      "index": 10,
+      "file": "frames/frame_010.png",
+      "x": 1920,
+      "y": 480,
+      "width": 480,
+      "height": 480,
+      "duration_ms": 50.0
+    },
+    {
+      "index": 11,
+      "file": "frames/frame_011.png",
+      "x": 2400,
+      "y": 480,
+      "width": 480,
+      "height": 480,
+      "duration_ms": 50.0
+    },
+    {
+      "index": 12,
+      "file": "frames/frame_012.png",
+      "x": 0,
+      "y": 960,
+      "width": 480,
+      "height": 480,
+      "duration_ms": 50.0
+    },
+    {
+      "index": 13,
+      "file": "frames/frame_013.png",
+      "x": 480,
+      "y": 960,
+      "width": 480,
+      "height": 480,
+      "duration_ms": 50.0
+    },
+    {
+      "index": 14,
+      "file": "frames/frame_014.png",
+      "x": 960,
+      "y": 960,
+      "width": 480,
+      "height": 480,
+      "duration_ms": 50.0
+    },
+    {
+      "index": 15,
+      "file": "frames/frame_015.png",
+      "x": 1440,
+      "y": 960,
+      "width": 480,
+      "height": 480,
+      "duration_ms": 50.0
+    },
+    {
+      "index": 16,
+      "file": "frames/frame_016.png",
+      "x": 1920,
+      "y": 960,
+      "width": 480,
+      "height": 480,
+      "duration_ms": 50.0
+    },
+    {
+      "index": 17,
+      "file": "frames/frame_017.png",
+      "x": 2400,
+      "y": 960,
+      "width": 480,
+      "height": 480,
+      "duration_ms": 50.0
+    },
+    {
+      "index": 18,
+      "file": "frames/frame_018.png",
+      "x": 0,
+      "y": 1440,
+      "width": 480,
+      "height": 480,
+      "duration_ms": 50.0
+    },
+    {
+      "index": 19,
+      "file": "frames/frame_019.png",
+      "x": 480,
+      "y": 1440,
+      "width": 480,
+      "height": 480,
+      "duration_ms": 50.0
+    },
+    {
+      "index": 20,
+      "file": "frames/frame_020.png",
+      "x": 960,
+      "y": 1440,
+      "width": 480,
+      "height": 480,
+      "duration_ms": 50.0
+    },
+    {
+      "index": 21,
+      "file": "frames/frame_021.png",
+      "x": 1440,
+      "y": 1440,
+      "width": 480,
+      "height": 480,
+      "duration_ms": 50.0
+    },
+    {
+      "index": 22,
+      "file": "frames/frame_022.png",
+      "x": 1920,
+      "y": 1440,
+      "width": 480,
+      "height": 480,
+      "duration_ms": 50.0
+    },
+    {
+      "index": 23,
+      "file": "frames/frame_023.png",
+      "x": 2400,
+      "y": 1440,
+      "width": 480,
+      "height": 480,
+      "duration_ms": 50.0
+    },
+    {
+      "index": 24,
+      "file": "frames/frame_024.png",
+      "x": 0,
+      "y": 1920,
+      "width": 480,
+      "height": 480,
+      "duration_ms": 50.0
+    },
+    {
+      "index": 25,
+      "file": "frames/frame_025.png",
+      "x": 480,
+      "y": 1920,
+      "width": 480,
+      "height": 480,
+      "duration_ms": 50.0
+    },
+    {
+      "index": 26,
+      "file": "frames/frame_026.png",
+      "x": 960,
+      "y": 1920,
+      "width": 480,
+      "height": 480,
+      "duration_ms": 50.0
+    },
+    {
+      "index": 27,
+      "file": "frames/frame_027.png",
+      "x": 1440,
+      "y": 1920,
+      "width": 480,
+      "height": 480,
+      "duration_ms": 50.0
+    },
+    {
+      "index": 28,
+      "file": "frames/frame_028.png",
+      "x": 1920,
+      "y": 1920,
+      "width": 480,
+      "height": 480,
+      "duration_ms": 50.0
+    },
+    {
+      "index": 29,
+      "file": "frames/frame_029.png",
+      "x": 2400,
+      "y": 1920,
+      "width": 480,
+      "height": 480,
+      "duration_ms": 50.0
+    },
+    {
+      "index": 30,
+      "file": "frames/frame_030.png",
+      "x": 0,
+      "y": 2400,
+      "width": 480,
+      "height": 480,
+      "duration_ms": 50.0
+    },
+    {
+      "index": 31,
+      "file": "frames/frame_031.png",
+      "x": 480,
+      "y": 2400,
+      "width": 480,
+      "height": 480,
+      "duration_ms": 50.0
+    }
+  ],
+  "source_page": "https://www.sigstick.com/pack/6P5rlqB6ERkPgukuxZvx",
+  "image_url": "https://cdn2.cdnstep.com/6P5rlqB6ERkPgukuxZvx/17-2.png",
+  "original_sha256": "f5aa75968a20613f6053a00f47313ef69f843c8016478daaba9a5124511cb99f",
+  "source_format": "APNG"
+}

@@ -1,0 +1,31 @@
+{
+  "manifest_version": 3,
+  "name": "트윙클 AI 응답 알림",
+  "version": "0.4.0",
+  "description": "ChatGPT·Claude·Gemini 웹 응답 종료를 내 PC 캐릭터에 전달합니다.",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA4fGSqEO76nXBRLiBRGASmF/G2IcLFj3zeIg8jWVDXHl1H6YErGQgE8khOUoyd7U5aAH0D7htfHyVIPZjnh6NDScB4PgslJp/XoepvlfdU/UUeA8Mu/oFBgbscA8AJeqXLvLKDBO9aoUrKvxgKLtaLLv3/ueAoaYoQQ4RgH6R1kpLHDCmGR4JRopAAwGivQthtbMOqrvC8Ku+CB05ZM0m4oN3KyC9NEO1GLyGGQ7DvkAN/YLqzBlx14tgm94SC9QFCMjLGRf1ITdgmdSPl7JgmW5hUETG+H4G0YIWIcthCKobWFX8hahUqBBeygceSeJVQqA307Jua3r3VKiAtqa/7wIDAQAB",
+  "permissions": [
+    "nativeMessaging",
+    "storage"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://chatgpt.com/*",
+        "https://claude.ai/*",
+        "https://gemini.google.com/*"
+      ],
+      "js": [
+        "detector.js",
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}
