@@ -37,7 +37,7 @@ else
   codesign --force --sign - "$APP"
 fi
 codesign --verify --deep --strict "$APP"
-lipo -verify_arch arm64 x86_64 "$APP/Contents/MacOS/TwinkleAgent"
+lipo "$APP/Contents/MacOS/TwinkleAgent" -verify_arch arm64 x86_64
 "$APP/Contents/MacOS/TwinkleAgent" --self-test
 "$APP/Contents/MacOS/TwinkleAgent" --smoke-test
 if [[ -n "${NOTARY_PROFILE:-}" ]]; then

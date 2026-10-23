@@ -304,6 +304,7 @@ final class Desktop: NSObject, NSApplicationDelegate, NSMenuDelegate {
     func menuDidClose(_ menu: NSMenu) { isMenuOpen = false; nextWalk = now + 2 }
     func makeMenu() -> NSMenu { let menu = NSMenu(); menu.delegate = self; populate(menu); return menu }
     func refreshMenu() { if !isMenuOpen { statusItem?.menu = makeMenu() } }
+    @discardableResult
     func add(_ menu: NSMenu, _ title: String, _ action: Selector, value: Any? = nil) -> NSMenuItem {
         let item = NSMenuItem(title: title, action: action, keyEquivalent: "")
         item.target = self; item.representedObject = value; menu.addItem(item); return item
