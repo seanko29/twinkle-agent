@@ -98,6 +98,8 @@ func runAgentTests() async throws {
     try verify(prompt.contains("untrusted email data") && prompt.contains("[mail ID: number]"), "mail remains source data with citations")
     try rejects({ _ = try MailPrompt.make(messages: [], question: "", english: true) }, "empty selection rejected")
     try verify(ClaudeCode.summaryArguments.contains("--no-session-persistence") && ClaudeCode.summaryArguments.contains("--tools"), "Claude CLI scope and persistence")
+    try verify(ClaudeCode.usesSubscription(["authMethod": "claude.ai"]), "Claude subscription classification")
+    try verify(!ClaudeCode.usesSubscription(["authMethod": "api_key"]), "no implicit API billing in subscription mode")
 
     let child = ChildProcess()
     let process = try await child.run(executable: URL(fileURLWithPath: "/bin/cat"), arguments: [], input: Data("synthetic input".utf8))

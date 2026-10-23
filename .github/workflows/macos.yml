@@ -2,7 +2,7 @@ name: macOS app
 
 on:
   push:
-    branches: [main, 'feat/macos-*']
+    branches: [main]
     paths: ['twinkle_macos/**', 'twinkle_desktop/assets/**', 'twinkle_desktop/library/**', 'twinkle_twinkle/**', 'scripts/**', 'index.html', '.github/workflows/macos.yml']
   pull_request:
     paths: ['twinkle_macos/**', 'twinkle_desktop/assets/**', 'twinkle_desktop/library/**', 'twinkle_twinkle/**', 'scripts/**', 'index.html', '.github/workflows/macos.yml']

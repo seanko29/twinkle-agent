@@ -158,9 +158,21 @@ enum ClaudeCode {
         "--strict-mcp-config", "--mcp-config", "{\"mcpServers\":{}}", "--disable-slash-commands",
         "--no-chrome", "--no-session-persistence"]
 
-    static func summarize(_ prompt: String, runner: ChildProcess) async throws -> String {
+    static func usesSubscription(_ auth: [String: Any]) -> Bool {
+        ["claude.ai", "oauth_token"].contains(auth["authMethod"] as? String ?? "")
+    }
+
+    static func summarize(_ prompt: String, runner: ChildProcess, allowAPIBilling: Bool = false) async throws -> String {
         guard let executable = executable() else {
             throw AgentFailure("Claude Code를 설치한 뒤 로그인해 주세요. Install Claude Code and sign in first.")
+        }
+        let status = try await runner.run(executable: executable, arguments: ["--safe-mode", "auth", "status"], timeout: 20)
+        guard status.status == 0,
+              let auth = try? JSONSerialization.jsonObject(with: status.data) as? [String: Any] else {
+            throw AgentFailure("Claude Code에서 먼저 로그인해 주세요. Sign in to Claude Code first.")
+        }
+        guard allowAPIBilling || usesSubscription(auth) else {
+            throw AgentFailure("현재 Claude Code는 구독 인증이 아닙니다. 구독 계정으로 로그인하거나 AI 선택에서 API/클라우드 과금 모드를 직접 고르세요. Select subscription login or explicitly choose API/cloud billing mode.")
         }
         let folder = FileManager.default.temporaryDirectory.appendingPathComponent("twinkle-ai-" + UUID().uuidString)
         try FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true,

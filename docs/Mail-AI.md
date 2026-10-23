@@ -21,7 +21,7 @@
 
 공식 **Claude Code**를 별도로 설치하고 **Claude Code 로그인**을 누릅니다. 트윙클은 Anthropic이 배포한 실행 파일을 변경하지 않고, 사용자가 직접 로그인한 환경에서 실행합니다. Claude 웹사이트의 쿠키나 OAuth 토큰을 추출하지 않습니다. **연결 확인**에 실제 인증 방식이 표시됩니다.
 
-Claude Code에서 구독 계정으로 로그인했다면 본인 구독의 이용 조건과 한도를 따릅니다. `ANTHROPIC_API_KEY`, API 키 도우미 또는 클라우드 공급자가 설정되어 있으면 그 설정에 따른 별도 과금이 적용될 수 있습니다. Claude Code의 공식 인증 수단을 변경하거나 대체하지 않습니다. 앱 제공자는 Anthropic의 Claude Code 제품 제공 조건을 준수해야 합니다.
+**Claude Code 구독** 모드는 실제 인증 방식을 확인하고 구독 인증인 경우에만 요약합니다. `ANTHROPIC_API_KEY`, API 키 도우미 또는 클라우드 공급자 인증으로 되어 있다면 구독 모드에서 자동으로 API 과금으로 넘어가지 않습니다. 별도 과금을 원할 때만 AI 선택에서 **Claude Code API/클라우드 과금**을 직접 고르세요. Claude Code의 공식 인증 수단을 변경하거나 대체하지 않습니다. 앱 제공자는 Anthropic의 Claude Code 제품 제공 조건을 준수해야 합니다.
 
 요약은 공식 `claude -p` 경로를 사용합니다. 개인 메일이 명령행 인자에 노출되지 않도록 본문은 표준 입력으로 보냅니다. 최신 Claude Code의 `--safe-mode`, 도구 비활성화, 외부 MCP 비활성화, 세션 미저장 옵션을 사용합니다. 오래된 CLI에서 옵션 오류가 나면 Claude Code를 업데이트하세요. 이 옵션은 인증을 유지하면서 사용자 정의 훅·명령·프로젝트 설정을 요약 작업에서 분리합니다.
 
@@ -42,7 +42,7 @@ Open **✦ → Mail & AI assistant**. Add and sync your accounts in Apple Mail, 
 
 **ChatGPT:** Continue with ChatGPT and authorize plan usage. The app uses the official OSS dynamic-registration OAuth/PKCE/OIDC flow, validates signed identity tokens and granted scopes, stores credentials in Keychain, and lists models available to the selected account. Inference uses the public Responses API with `store: false` and `stream: true`, and only accepts a completed response. Your own plan eligibility, usage limits, and app caps apply. No partner key, shared client secret, or access to existing ChatGPT conversations is included.
 
-**Claude:** Install official Claude Code and sign in using its built-in authentication. Twinkle runs the unmodified CLI and sends message context over stdin. It does not extract browser cookies or Claude credentials. Your existing CLI authentication determines subscription, credits, API, or cloud-provider billing. Use Check connection to see the authentication method. Summary runs use safe mode, no tools/MCP, and no session persistence; update Claude Code if your version does not support those options. App providers must follow Anthropic's product-distribution terms.
+**Claude:** Install official Claude Code and sign in using its built-in authentication. Twinkle runs the unmodified CLI and sends message context over stdin. It does not extract browser cookies or Claude credentials. Subscription mode checks the actual authentication method and refuses implicit API/cloud billing. To use your own API/cloud configuration, explicitly select **Claude Code API/cloud billing**. Use Check connection to see the authentication method. Summary runs use safe mode, no tools/MCP, and no session persistence; update Claude Code if your version does not support those options. App providers must follow Anthropic's product-distribution terms.
 
 Mail polling and automatic summarization are separate, off-by-default options. Polling uses a first-run baseline. Automatic summaries send up to three newly discovered messages per poll. Manual summaries send only selected messages. Bodies are capped at 16,000 characters per message; attachments are not sent. Mail is never marked read, moved, deleted, or sent. Twinkle stores no message bodies or summaries on disk. Provider and CLI data policies still apply.
 

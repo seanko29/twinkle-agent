@@ -93,8 +93,9 @@ final class AssistantWindow: NSObject, NSTableViewDataSource, NSTableViewDelegat
         let view = opened.contentView!
         label(text("함께 읽고, 요약하고, 다음 할 일을 찾아요.", "Read together, summarize, and find the next action."),
               NSRect(x: 22, y: 715, width: 755, height: 25), parent: view)
-        provider.addItems(withTitles: [text("ChatGPT 구독", "ChatGPT plan"), "Claude Code (subscription / API)"])
-        provider.selectItem(at: settings.provider == "claude" ? 1 : 0)
+        provider.addItems(withTitles: [text("ChatGPT 구독", "ChatGPT plan"),
+            text("Claude Code 구독", "Claude Code subscription"), text("Claude Code API/클라우드 과금", "Claude Code API/cloud billing")])
+        provider.selectItem(at: settings.provider == "claude-api" ? 2 : settings.provider == "claude" ? 1 : 0)
         provider.frame = NSRect(x: 20, y: 675, width: 245, height: 30)
         provider.target = self; provider.action = #selector(providerChanged); view.addSubview(provider); controls.append(provider)
         model.frame = NSRect(x: 275, y: 675, width: 290, height: 30)
@@ -186,8 +187,8 @@ final class AssistantWindow: NSObject, NSTableViewDataSource, NSTableViewDelegat
     }
 
     @objc func providerChanged() {
-        settings.provider = provider.indexOfSelectedItem == 1 ? "claude" : "chatgpt"
-        model.isHidden = settings.provider == "claude"; save()
+        settings.provider = provider.indexOfSelectedItem == 2 ? "claude-api" : provider.indexOfSelectedItem == 1 ? "claude" : "chatgpt"
+        model.isHidden = settings.provider != "chatgpt"; save()
     }
     @objc func modelChanged() {
         if modelIDs.indices.contains(model.indexOfSelectedItem) { settings.model = modelIDs[model.indexOfSelectedItem]; save() }
@@ -214,7 +215,7 @@ final class AssistantWindow: NSObject, NSTableViewDataSource, NSTableViewDelegat
         model.selectItem(at: selected); settings.model = modelIDs[selected]; save()
     }
     @objc func refreshModels() {
-        if provider.indexOfSelectedItem == 1 { checkConnection(); return }
+        if provider.indexOfSelectedItem > 0 { checkConnection(); return }
         launch { [self] in try await updateModels(); activityStatus.stringValue = text("사용 가능한 모델을 불러왔어요.", "Available models loaded.") }
     }
     @objc func connectClaude() {
@@ -245,7 +246,7 @@ final class AssistantWindow: NSObject, NSTableViewDataSource, NSTableViewDelegat
     }
     @objc func checkConnection() {
         launch { [self] in
-            if settings.provider == "claude" { try await checkClaudeStatus() }
+            if settings.provider.hasPrefix("claude") { try await checkClaudeStatus() }
             else { try await updateModels(); updateAccountStatus(); activityStatus.stringValue = text("ChatGPT 연결 확인 완료", "ChatGPT connection checked") }
         }
     }
@@ -253,8 +254,8 @@ final class AssistantWindow: NSObject, NSTableViewDataSource, NSTableViewDelegat
     @objc func help() {
         let alert = NSAlert(); alert.messageText = text("연결하기", "Connect your services")
         alert.informativeText = text(
-            "1. Mail → 설정 → 계정에서 Gmail·Outlook·네이버 등의 계정을 추가하고 동기화하세요.\n2. 안 읽은 메일 가져오기를 누르고 macOS의 Mail 자동화 접근을 허용하세요.\n3. Continue with ChatGPT에서 구독 사용을 승인하거나, 공식 Claude Code를 설치하고 로그인하세요.\n4. 메일 1~5개를 선택하고 요약을 누르세요. 본문은 선택한 AI로 전송됩니다.\n\nClaude Code에 API 키/다른 공급자가 설정되어 있으면 해당 과금이 적용됩니다. 트윙클은 인증 방식을 변경하거나 토큰을 추출하지 않습니다.",
-            "1. Add and sync accounts in Mail → Settings → Accounts.\n2. Load unread mail and allow macOS Automation access to Mail.\n3. Continue with ChatGPT and approve plan usage, or install and sign in to official Claude Code.\n4. Select 1–5 messages and summarize. Their bodies go to the chosen AI.\n\nClaude Code uses its own configured authentication. An API key or cloud provider can incur separate charges. Twinkle does not extract Claude credentials.")
+            "1. Mail → 설정 → 계정에서 Gmail·Outlook·네이버 등의 계정을 추가하고 동기화하세요.\n2. 안 읽은 메일 가져오기를 누르고 macOS의 Mail 자동화 접근을 허용하세요.\n3. Continue with ChatGPT에서 구독 사용을 승인하거나, 공식 Claude Code를 설치하고 로그인하세요.\n4. 메일 1~5개를 선택하고 요약을 누르세요. 본문은 선택한 AI로 전송됩니다.\n\nClaude 구독 모드는 실제 구독 인증을 확인합니다. API/클라우드 과금은 해당 모드를 직접 선택한 경우에만 허용합니다. 트윙클은 Claude 인증 정보를 추출하지 않습니다.",
+            "1. Add and sync accounts in Mail → Settings → Accounts.\n2. Load unread mail and allow macOS Automation access to Mail.\n3. Continue with ChatGPT and approve plan usage, or install and sign in to official Claude Code.\n4. Select 1–5 messages and summarize. Their bodies go to the chosen AI.\n\nClaude subscription mode checks actual authentication and does not fall back to API billing. Explicitly choose API/cloud billing mode to use that authentication. Twinkle does not extract Claude credentials.")
         alert.runModal()
     }
 
@@ -283,7 +284,9 @@ final class AssistantWindow: NSObject, NSTableViewDataSource, NSTableViewDelegat
         let prompt = try MailPrompt.make(messages: context, question: question, english: english)
         activityStatus.stringValue = text("AI가 요약하고 할 일을 정리하는 중…", "AI is summarizing and finding next actions…")
         let answer: String
-        if settings.provider == "claude" { answer = try await ClaudeCode.summarize(prompt, runner: process) }
+        if settings.provider.hasPrefix("claude") {
+            answer = try await ClaudeCode.summarize(prompt, runner: process, allowAPIBilling: settings.provider == "claude-api")
+        }
         else { answer = try await chatGPT.summarize(prompt, model: settings.model) }
         try Task.checkCancellation(); output.string = answer
         activityStatus.stringValue = text("요약 완료 · 실제 메일에서 내용과 기한을 확인하세요.", "Summary ready · verify details and deadlines in the original mail.")
