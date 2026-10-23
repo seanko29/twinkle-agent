@@ -14,6 +14,14 @@ struct AssistantSettings: Codable {
     }
 }
 
+private final class AssistantContentView: NSView {
+    override var isOpaque: Bool { true }
+    override func draw(_ dirtyRect: NSRect) {
+        NSColor.windowBackgroundColor.setFill()
+        NSBezierPath(rect: bounds).fill()
+    }
+}
+
 final class AssistantWindow: NSObject, NSTableViewDataSource, NSTableViewDelegate, UNUserNotificationCenterDelegate {
     weak var desktop: Desktop?
     let chatGPT: ChatGPTConnection
@@ -81,6 +89,7 @@ final class AssistantWindow: NSObject, NSTableViewDataSource, NSTableViewDelegat
             styleMask: [.titled, .closable, .miniaturizable], backing: .buffered, defer: false)
         opened.title = text("트윙클 · 메일과 AI", "Twinkle · Mail & AI")
         opened.isReleasedWhenClosed = false
+        opened.contentView = AssistantContentView(frame: NSRect(x: 0, y: 0, width: 800, height: 760))
         let view = opened.contentView!
         label(text("함께 읽고, 요약하고, 다음 할 일을 찾아요.", "Read together, summarize, and find the next action."),
               NSRect(x: 22, y: 715, width: 755, height: 25), parent: view)

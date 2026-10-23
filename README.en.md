@@ -16,7 +16,7 @@ The native macOS 12+ app supports roaming, drag movement, activity timers, 47 an
 - [macOS builds and downloads](https://github.com/seanko29/twinkle-agent/actions/workflows/macos.yml): open a successful run and download its DMG/ZIP artifact. Sign-in required; 30-day retention.
 - One universal app includes Apple Silicon and Intel code. CI executes it on both kinds of Mac.
 - Current downloads are ad-hoc signed previews without Developer ID signing or notarization. The build script also supports the general-distribution signing path.
-- Mail integration and the Chrome/Edge notification bridge are not included on Mac. AI mail summaries are not implemented on either platform.
+- Mac connects Apple Mail with a ChatGPT plan or official Claude Code for summaries and next actions. See [Mail and subscription AI setup](docs/Mail-AI.md). The browser notification bridge remains Windows-only; Windows AI summaries are not implemented.
 
 ```bash
 # macOS + Xcode Command Line Tools + Python 3

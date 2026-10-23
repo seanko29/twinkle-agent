@@ -10,13 +10,13 @@
 
 ## macOS 시험 배포 · Apple Silicon / Intel
 
-macOS 12 이상에서 실행하는 네이티브 앱을 추가했습니다. 캐릭터 이동·드래그·집중/휴식/회의 타이머·47개 이미지 선택·개인 이미지 추가·메뉴 막대를 지원합니다. Mac UI도 한국어/영어를 전환할 수 있습니다.
+macOS 12 이상에서 실행하는 네이티브 앱을 추가했습니다. 캐릭터 이동·드래그·집중/휴식/회의 타이머·47개 이미지 선택·개인 이미지 추가·메뉴 막대를 지원합니다. Mac UI도 한국어/영어를 전환할 수 있습니다. 0.10.0 preview부터 메일·구독 AI 도우미를 포함합니다.
 
 - [Mac 설치·조작·빌드·서명 안내](docs/macOS.md)
 - [macOS 앱 빌드와 다운로드](https://github.com/seanko29/twinkle-agent/actions/workflows/macos.yml): 성공한 실행의 Artifacts에서 DMG/ZIP을 받습니다. GitHub 로그인 필요, 30일 보관.
 - 하나의 universal 앱에 Apple Silicon과 Intel 코드를 함께 포함합니다. CI는 두 종류의 Mac에서 각각 실행합니다.
 - 현재는 Apple Developer ID 서명·공증 전 시험 배포본입니다. 일반 배포용 서명·공증 경로도 빌드 스크립트에 준비되어 있습니다.
-- 메일 연동·Chrome/Edge 완료 알림은 Mac 버전에 아직 없습니다. AI 메일 요약은 두 플랫폼 모두 미구현입니다.
+- Mac은 Apple Mail + ChatGPT 구독 / Claude Code를 연결해 메일 요약과 할 일 추출을 지원합니다. [메일·구독 AI 연결 안내](docs/Mail-AI.md). Chrome/Edge 완료 알림은 Windows 전용이며 Windows AI 요약은 미구현입니다.
 
 ```bash
 # macOS + Xcode Command Line Tools + Python 3

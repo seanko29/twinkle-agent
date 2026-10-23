@@ -1,6 +1,6 @@
 # macOS preview · KOR / ENG
 
-Twinkle Agent 0.9.0 preview adds a native AppKit companion for **macOS 12+**, with one universal app for **Apple Silicon and Intel**. No Python, .NET, or API key is required to run the packaged app.
+Twinkle Agent 0.10.0 preview adds a native AppKit companion for **macOS 12+**, with one universal app for **Apple Silicon and Intel**. No Python or .NET is required for the packaged app. ChatGPT plan sign-in is built in; Claude requires a separate official Claude Code installation.
 
 ## 한국어 · 설치
 
@@ -22,13 +22,13 @@ Twinkle Agent 0.9.0 preview adds a native AppKit companion for **macOS 12+**, wi
 | 개인 이미지 제한 | 파일당 32 MB / 300프레임, 디코딩은 프레임당 최대 512px |
 | 사용법·갤러리 | KOR / ENG, 전체 갤러리를 오프라인으로 포함 |
 | 숨기기·종료 | 메뉴 막대 ✦에서 숨기기/보이기, 종료 |
-| 메일 계정 연동 | Mac 버전에 미포함. Windows용 연결 코드는 기존 경로에 유지 |
+| 메일 계정 연동 | Apple Mail에 등록된 계정의 안 읽은 메일·본문 읽기, 선택형 새 메일 확인 |
 | Chrome/Edge 완료 알림 | Windows 전용. Mac 브라우저 브리지는 미구현 |
-| AI 메일 요약 | 두 플랫폼 모두 미구현 |
+| AI 메일 요약 | Mac: ChatGPT 구독 OAuth / 공식 Claude Code, 요약·할 일·답장 초안. Windows 미구현 |
 
 집중·휴식·회의 중에는 제자리에서 애니메이션을 재생합니다. **퇴근**을 선택하면 인사 후 다시 돌아다닙니다. 설정 창은 별도 창으로 열리며 전체 앱을 멈추지 않습니다.
 
-설정은 `~/Library/Application Support/TwinkleAgent/settings.json`, 추가 이미지는 그 아래 `images/`에 저장됩니다. 앱 번들 안에 사용자 데이터를 쓰지 않아 Applications 폴더에서도 동작하고, 앱을 교체해도 개인 설정이 유지됩니다. 계정·비밀번호·API 키를 수집하거나 포함하지 않습니다.
+설정은 `~/Library/Application Support/TwinkleAgent/settings.json`, 추가 이미지는 그 아래 `images/`에 저장됩니다. 앱 번들 안에 사용자 데이터를 쓰지 않아 Applications 폴더에서도 동작하고, 앱을 교체해도 개인 설정이 유지됩니다. 메일 비밀번호는 Mail 앱이 관리하고 ChatGPT 토큰은 Keychain에 저장합니다. 선택한 메일은 선택한 AI로 전송됩니다. [메일·구독 AI 연결 안내](Mail-AI.md)
 
 ## English · install and use
 
@@ -39,7 +39,7 @@ Twinkle Agent 0.9.0 preview adds a native AppKit companion for **macOS 12+**, wi
 
 Focus, Rest, and Meeting animate in place and track elapsed time. Off work plays a farewell then resumes roaming. The image picker is modeless. All 47 animations and the bilingual guide/gallery are bundled offline. Personal GIF/APNG/PNG/JPG imports are limited to 32 MB and 300 frames; frames are decoded at up to 512px.
 
-Settings and imports are stored in `~/Library/Application Support/TwinkleAgent/`, outside the app bundle. No credentials are bundled or collected. **Mac mail integration, the browser notification bridge, and AI summaries are not included.**
+Settings and imports are stored in `~/Library/Application Support/TwinkleAgent/`, outside the app bundle. No credentials are bundled. Apple Mail handles mail credentials; ChatGPT tokens are stored in Keychain. Selected messages are sent to the chosen AI for summaries. See [Mail and subscription AI setup](Mail-AI.md). The browser completion bridge remains Windows-only.
 
 CI builds are **ad-hoc signed previews without Developer ID signing or Apple notarization**. Downloaded copies may be blocked by Gatekeeper. See [Apple's guidance](https://support.apple.com/102445). General distribution requires the signing and notarization steps below.
 
@@ -55,7 +55,7 @@ The script compiles both `arm64` and `x86_64` for macOS 12, combines them with `
 
 The workflow runs on both an Apple Silicon and an Intel GitHub-hosted Mac. Each executes the universal app natively on its own architecture. Resource validation covers all eight activity clips and all 47 library entries / 555 frames. The UI smoke test covers transparent-window creation, activity changes, pause/resume, resize, hide/show, image choice, the modeless picker, and PNG rendering.
 
-The minimum deployment target is macOS 12; CI runs on macOS 15. Physical-Mac checks of multiple monitors, full-screen spaces, drag gestures, imported APNG timing, sleep/wake, and a quarantined download remain necessary. CI smoke tests do not establish those behaviors.
+Subscription connection and Mail account access need live-user verification as described in [Mail-AI.md](Mail-AI.md). The minimum deployment target is macOS 12; CI runs on macOS 15. Physical-Mac checks of multiple monitors, full-screen spaces, drag gestures, imported APNG timing, sleep/wake, and a quarantined download remain necessary. CI smoke tests do not establish those behaviors.
 
 ## Developer ID signing / Apple 공증
 
