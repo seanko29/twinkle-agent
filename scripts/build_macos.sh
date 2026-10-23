@@ -18,6 +18,7 @@ SDK="$(xcrun --sdk macosx --show-sdk-path)"
 for ARCH in arm64 x86_64; do
   xcrun swiftc -O -swift-version 5 -sdk "$SDK" -target "$ARCH-apple-macosx12.0" \
     -framework AppKit -framework ImageIO -framework UniformTypeIdentifiers \
+    -framework Security -framework Network -framework CryptoKit -framework UserNotifications \
     twinkle_macos/Sources/*.swift -o "$BUILD/TwinkleAgent-$ARCH"
 done
 lipo -create "$BUILD/TwinkleAgent-arm64" "$BUILD/TwinkleAgent-x86_64" \
@@ -32,9 +33,9 @@ for SIZE in 16 32 128 256 512; do
 done
 iconutil -c icns "$ICONSET" -o "$APP/Contents/Resources/Twinkle.icns"
 if [[ -n "${CODESIGN_IDENTITY:-}" ]]; then
-  codesign --force --options runtime --timestamp --sign "$CODESIGN_IDENTITY" "$APP"
+  codesign --force --options runtime --timestamp --entitlements twinkle_macos/Entitlements.plist --sign "$CODESIGN_IDENTITY" "$APP"
 else
-  codesign --force --sign - "$APP"
+  codesign --force --entitlements twinkle_macos/Entitlements.plist --sign - "$APP"
 fi
 codesign --verify --deep --strict "$APP"
 lipo "$APP/Contents/MacOS/TwinkleAgent" -verify_arch arm64 x86_64

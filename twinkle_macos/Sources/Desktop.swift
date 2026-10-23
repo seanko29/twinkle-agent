@@ -141,6 +141,8 @@ final class Desktop: NSObject, NSApplicationDelegate, NSMenuDelegate {
     var picker: NSWindow?
     var pickerActivity = Activity.offWork
     var smokeTest = false
+    var assistantBusy = false
+    var assistant: AssistantWindow?
 
     var now: Double { ProcessInfo.processInfo.systemUptime }
     func text(_ ko: String, _ en: String) -> String { preferences.english ? en : ko }
@@ -191,11 +193,14 @@ final class Desktop: NSObject, NSApplicationDelegate, NSMenuDelegate {
         NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(woke),
             name: NSWorkspace.didWakeNotification, object: nil)
         tick()
+        let agentSettings = settingsURL.deletingLastPathComponent().appendingPathComponent("assistant.json")
+        if !smokeTest && AssistantSettings.load(agentSettings).monitorMail { assistant = AssistantWindow(desktop: self) }
         if smokeTest { runSmokeTest() }
     }
 
     func applicationWillTerminate(_ notification: Notification) {
         timer?.invalidate()
+        assistant?.stop()
         if smokeTest { try? FileManager.default.removeItem(at: settingsURL.deletingLastPathComponent()) }
     }
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool { false }
@@ -226,8 +231,9 @@ final class Desktop: NSObject, NSApplicationDelegate, NSMenuDelegate {
     func tick() {
         let time = now, dt = min(0.1, max(0, time - lastTick)); lastTick = time
         var state = activity.animation
+        if assistantBusy && !session.active { state = "focus" }
         let canWalk = activity == .offWork && preferences.roaming && panel.isVisible
-            && !pet.dragging && !interacting && !isMenuOpen && time >= farewellUntil
+            && !pet.dragging && !interacting && !isMenuOpen && !assistantBusy && time >= farewellUntil
         if time < farewellUntil { state = "farewell" }
         if canWalk {
             let area = (panel.screen ?? NSScreen.main)?.visibleFrame ?? panel.frame
@@ -340,6 +346,7 @@ final class Desktop: NSObject, NSApplicationDelegate, NSMenuDelegate {
         for value in Activity.allCases { add(choices, value.title(preferences.english), #selector(openPicker(_:)), value: value.rawValue) }
         images.submenu = choices; menu.addItem(images)
         menu.addItem(.separator())
+        add(menu, text("메일 · AI 도우미", "Mail & AI assistant"), #selector(openAssistant))
         add(menu, "한국어 / English", #selector(toggleLanguage))
         add(menu, "사용법 / Guide (KOR · ENG)", #selector(openGuide))
         add(menu, text("이미지 갤러리", "Image gallery"), #selector(openGallery))
@@ -354,11 +361,15 @@ final class Desktop: NSObject, NSApplicationDelegate, NSMenuDelegate {
     @objc func openGuide() { NSWorkspace.shared.open(root.appendingPathComponent("guide/index.html")) }
     @objc func openGallery() { NSWorkspace.shared.open(root.appendingPathComponent("gallery/index.html")) }
     @objc func quit() { NSApplication.shared.terminate(nil) }
+    @objc func openAssistant() {
+        if assistant == nil { assistant = AssistantWindow(desktop: self) }
+        assistant?.show()
+    }
     @objc func about() {
-        let alert = NSAlert(); alert.messageText = "Twinkle Agent · macOS 0.9.0 preview"
+        let alert = NSAlert(); alert.messageText = "Twinkle Agent · macOS 0.10.0 preview"
         alert.informativeText = text(
-            "macOS 12 이상 · Apple Silicon / Intel\n캐릭터 이동·타이머·47개 이미지·개인 이미지 추가를 지원해요.\n메일 연결·브라우저 완료 알림·AI 요약은 이 Mac 버전에 포함되지 않아요.\n설정과 이미지는 이 Mac에만 저장돼요.",
-            "macOS 12+ · Apple Silicon / Intel\nRoaming, timers, 47 animations, and image import.\nMail connections, browser completion notifications, and AI summaries are not included in this Mac preview.\nPreferences and imported images stay on this Mac.")
+            "macOS 12 이상 · Apple Silicon / Intel\n캐릭터 이동·타이머·47개 이미지·개인 이미지 추가를 지원해요.\nMail 앱의 메일과 ChatGPT 구독 / Claude Code를 연결해 요약과 할 일을 정리해요. 선택한 메일은 해당 AI 서비스로 전송됩니다.\n브라우저 완료 알림은 아직 Windows 전용입니다.",
+            "macOS 12+ · Apple Silicon / Intel\nRoaming, timers, 47 animations, and image import.\nConnect Mail with a ChatGPT plan or Claude Code for summaries and next actions. Selected messages are sent to the chosen AI service.\nThe browser completion bridge remains Windows-only.")
         NSApplication.shared.activate(ignoringOtherApps: true); alert.runModal()
     }
 }
