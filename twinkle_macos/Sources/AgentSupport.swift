@@ -154,9 +154,8 @@ enum ClaudeCode {
                      "/opt/homebrew/bin/claude", "/usr/local/bin/claude"]
         return paths.first(where: { FileManager.default.isExecutableFile(atPath: $0) }).map { URL(fileURLWithPath: $0) }
     }
-    static let summaryArguments = ["-p", "--output-format", "json", "--tools", "",
-        "--strict-mcp-config", "--mcp-config", "{\"mcpServers\":{}}", "--setting-sources", "",
-        "--settings", "{\"disableAllHooks\":true}", "--disable-slash-commands",
+    static let summaryArguments = ["-p", "--safe-mode", "--output-format", "json", "--tools", "",
+        "--strict-mcp-config", "--mcp-config", "{\"mcpServers\":{}}", "--disable-slash-commands",
         "--no-chrome", "--no-session-persistence"]
 
     static func summarize(_ prompt: String, runner: ChildProcess) async throws -> String {

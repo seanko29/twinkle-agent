@@ -71,6 +71,9 @@ final class AssistantWindow: NSObject, NSTableViewDataSource, NSTableViewDelegat
         if window == nil { buildWindow() }
         updateAccountStatus()
         NSApplication.shared.activate(ignoringOtherApps: true); window?.makeKeyAndOrderFront(nil)
+        if chatGPT.account != nil && modelIDs.isEmpty && !busy {
+            launch { [self] in try await updateModels() }
+        }
     }
 
     func buildWindow() {
@@ -188,11 +191,12 @@ final class AssistantWindow: NSObject, NSTableViewDataSource, NSTableViewDelegat
         }
     }
     @objc func disconnectGPT() {
-        guard !busy else { return }
-        do {
-            try chatGPT.disconnect(); modelIDs = []; model.removeAllItems(); settings.model = ""; save(); updateAccountStatus()
-            activityStatus.stringValue = text("로컬 연결을 해제했어요. ChatGPT 설정에서도 앱 접근을 해제할 수 있어요.", "Local connection removed. You can revoke app access in ChatGPT settings.")
-        } catch { activityStatus.stringValue = error.localizedDescription }
+        launch { [self] in
+            let revoked = try await chatGPT.disconnect()
+            modelIDs = []; model.removeAllItems(); settings.model = ""; save(); updateAccountStatus()
+            activityStatus.stringValue = revoked ? text("ChatGPT 연결을 해제했어요.", "ChatGPT connection revoked.")
+                : text("로컬 연결은 삭제했지만 서버 해제를 확인하지 못했어요. ChatGPT 설정 → 보안에서 앱 연결을 해제해 주세요.", "Local tokens cleared; remote revocation unconfirmed. Disconnect the app in ChatGPT settings.")
+        }
     }
     @MainActor func updateModels() async throws {
         let available = try await chatGPT.models()

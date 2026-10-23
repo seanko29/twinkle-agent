@@ -34,3 +34,21 @@ jobs:
           path: dist/macos/
           if-no-files-found: error
           retention-days: 30
+      - name: Upload UI previews
+        uses: actions/upload-artifact@v4
+        with:
+          name: TwinkleAgent-macOS-UI-${{ matrix.os }}
+          path: dist/macos/*.png
+          if-no-files-found: error
+          retention-days: 30
+      - name: Upload DMG for direct testing
+        if: matrix.os == 'macos-15'
+        uses: actions/upload-artifact@v4
+        with:
+          name: TwinkleAgent-macOS-DMG
+          path: |
+            dist/macos/*.dmg
+            dist/macos/INSTALL.txt
+            dist/macos/SHA256SUMS.txt
+          if-no-files-found: error
+          retention-days: 30

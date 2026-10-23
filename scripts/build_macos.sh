@@ -63,6 +63,7 @@ if [[ -n "${NOTARY_PROFILE:-}" ]]; then
 fi
 ditto -c -k --sequesterRsrc --keepParent "$APP" "$DIST/TwinkleAgent_macOS_universal.zip"
 cp "$BUILD/TwinkleAgent_macOS_preview.png" "$DIST/"
+cp "$BUILD/TwinkleAgent_macOS_mail_AI.png" "$DIST/"
 cp twinkle_macos/INSTALL.txt "$DIST/INSTALL.txt"
 (cd "$DIST" && shasum -a 256 TwinkleAgent_macOS_universal.dmg TwinkleAgent_macOS_universal.zip > SHA256SUMS.txt)
 echo "Built Apple Silicon + Intel macOS 12+ app, ZIP and DMG in dist/macos/."

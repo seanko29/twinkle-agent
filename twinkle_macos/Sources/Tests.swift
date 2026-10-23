@@ -79,13 +79,28 @@ extension Desktop {
                 openPicker(temporaryMenu)
                 try check(picker?.isVisible == true, "modeless image picker")
                 picker?.close()
+                openAssistant()
+                guard let helper = assistant, let content = helper.window?.contentView else {
+                    throw ResourceError.invalid("TEST FAILED: mail assistant window")
+                }
+                helper.messages = [MailMessage(id: 1, subject: "회의 일정 확인 / Meeting time", sender: "team@example.test", received: "2026-10-23")]
+                helper.table.reloadData(); helper.table.selectRowIndexes(IndexSet(integer: 0), byExtendingSelection: false)
+                helper.output.string = "UI test fixture · No real mailbox or provider account is connected.\n\n메일을 선택하고 구독 AI로 요약하면 이곳에 결과와 다음 할 일이 나타납니다."
+                try check(helper.table.numberOfRows == 1, "mail assistant table")
+                content.displayIfNeeded()
+                let assistantBitmap = content.bitmapImageRepForCachingDisplay(in: content.bounds)!
+                content.cacheDisplay(in: content.bounds, to: assistantBitmap)
+                let assistantPreview = root.deletingLastPathComponent().deletingLastPathComponent()
+                    .deletingLastPathComponent().appendingPathComponent("TwinkleAgent_macOS_mail_AI.png")
+                try assistantBitmap.representation(using: .png, properties: [:])!.write(to: assistantPreview)
+                helper.window?.close()
                 let screenshot = root.deletingLastPathComponent().deletingLastPathComponent()
                     .deletingLastPathComponent().appendingPathComponent("TwinkleAgent_macOS_preview.png")
                 pet.displayIfNeeded()
                 let bitmap = pet.bitmapImageRepForCachingDisplay(in: pet.bounds)!
                 pet.cacheDisplay(in: pet.bounds, to: bitmap)
                 try bitmap.representation(using: .png, properties: [:])!.write(to: screenshot)
-                print("PASS: native AppKit window, activity changes, pause/resume, resize, hide/show, gallery selection, picker, rendered PNG")
+                print("PASS: native AppKit window, activities, pause/resume, resize, hide/show, gallery, picker, mail/AI window and synthetic table, rendered PNGs")
                 NSApplication.shared.terminate(nil)
             } catch {
                 fputs("\(error)\n", stderr); exit(1)

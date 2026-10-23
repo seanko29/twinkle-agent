@@ -9,6 +9,11 @@ guard let resourceRoot = Bundle.main.resourceURL else {
 do {
     if CommandLine.arguments.contains("--self-test") {
         try runSelfTests(root: resourceRoot)
+        Task {
+            do { try await runAgentTests(); exit(0) }
+            catch { fputs("\(error)\n", stderr); exit(1) }
+        }
+        dispatchMain()
     } else {
         let smoke = CommandLine.arguments.contains("--smoke-test")
         let testSettings = smoke ? FileManager.default.temporaryDirectory

@@ -48,7 +48,7 @@ enum IDTokenValidator {
         if (value.first ?? 0) >= 128 { value.insert(0, at: 0) }
         return der(0x02, value)
     }
-    static func validate(_ jwt: String, clientID: String, nonce: String,
+    static func validate(_ jwt: String, clientID: String, nonce: String?,
                          jwks: [String: Any], now: Date = Date()) throws -> [String: Any] {
         let pieces = jwt.split(separator: ".", omittingEmptySubsequences: false).map(String.init)
         guard pieces.count == 3, let headerData = decodeBase64url(pieces[0]),
@@ -74,7 +74,7 @@ enum IDTokenValidator {
         guard claims["iss"] as? String == "https://auth.openai.com", audiences.contains(clientID),
               let expiry = claims["exp"] as? Double, expiry > now.timeIntervalSince1970,
               (claims["nbf"] as? Double ?? 0) <= now.timeIntervalSince1970 + 30,
-              claims["nonce"] as? String == nonce,
+              (nonce == nil || claims["nonce"] as? String == nonce),
               let subject = claims["sub"] as? String, !subject.isEmpty else {
             throw AgentFailure("ChatGPT account identity or sign-in attempt did not match.")
         }
@@ -105,7 +105,7 @@ final class OAuthCallback {
                         guard let self = self else { return }
                         switch state {
                         case .ready:
-                            if let port = server.port?.rawValue { self.readyContinuation?.resume(returning: port) }
+                            if let port = self.listener?.port?.rawValue { self.readyContinuation?.resume(returning: port) }
                             else { self.readyContinuation?.resume(throwing: AgentFailure("Sign-in callback has no port.")) }
                             self.readyContinuation = nil
                         case .failed(let error):
@@ -179,7 +179,7 @@ final class ChatGPTConnection {
     private let hostID: String
     private let credentialName = "chatgpt-account"
 
-    init(http: HTTPSending = AgentHTTP(), loadSaved: Bool = true) {
+    init(http: HTTPSending = AgentHTTP(), loadSaved: Bool = true, fixtureAccount: ChatGPTAccount? = nil) {
         self.http = http
         let key = "TwinkleAgent.ChatGPT.hostID"
         if let stored = UserDefaults.standard.string(forKey: key) { hostID = stored }
@@ -190,10 +190,47 @@ final class ChatGPTConnection {
         if loadSaved, let data = try? SecretStore.read(credentialName) {
             account = try? JSONDecoder().decode(ChatGPTAccount.self, from: data)
         }
+        if !loadSaved { account = fixtureAccount }
     }
     func cancelLogin() { callback?.cancel(); callback = nil }
-    func disconnect() throws {
-        cancelLogin(); try SecretStore.remove(credentialName); account = nil
+    func disconnect() async throws -> Bool {
+        cancelLogin()
+        var revoked = account == nil
+        if let stored = account {
+            do {
+                var discovery = URLRequest(url: URL(string: "https://auth.openai.com/.well-known/openid-configuration")!)
+                discovery.timeoutInterval = 15
+                let (data, status) = try await http.send(discovery)
+                guard status == 200, let json = try JSONSerialization.jsonObject(with: data) as? [String: Any],
+                      let value = json["revocation_endpoint"] as? String,
+                      let endpoint = URL(string: value), endpoint.scheme == "https", endpoint.host == "auth.openai.com" else {
+                    throw AgentFailure("No trusted revocation endpoint.")
+                }
+                var request = URLRequest(url: endpoint); request.httpMethod = "POST"; request.timeoutInterval = 15
+                request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+                request.httpBody = formEncoded(["token": stored.refreshToken, "token_type_hint": "refresh_token", "client_id": stored.clientID])
+                for attempt in 0..<2 {
+                    let (_, code) = try await http.send(request)
+                    if code == 200 { revoked = true; break }
+                    if code < 500 { break }
+                    if attempt == 0 { try await Task.sleep(nanoseconds: 1_000_000_000) }
+                }
+            } catch { revoked = false }
+        }
+        try SecretStore.remove(credentialName); account = nil
+        return revoked
+    }
+
+    static func callbackValues(_ response: URL, state: String, previousClient: String?) throws -> [String: String] {
+        let items = URLComponents(url: response, resolvingAgainstBaseURL: false)?.queryItems ?? []
+        guard Set(items.map(\.name)).count == items.count else { throw AgentFailure("Duplicate OAuth callback parameters.") }
+        let values = Dictionary(uniqueKeysWithValues: items.map { ($0.name, $0.value ?? "") })
+        guard values["state"] == state else { throw AgentFailure("Sign-in state did not match. Try again.") }
+        guard values["error"] == nil else { throw AgentFailure("ChatGPT 로그인 또는 구독 사용 승인이 취소됐어요. Sign-in or plan access was declined.") }
+        let client = values["client_id"] ?? previousClient ?? ""
+        guard !client.isEmpty, client != "dynamic_agent_client", previousClient == nil || client == previousClient,
+              let code = values["code"], !code.isEmpty else { throw AgentFailure("Incomplete ChatGPT client registration.") }
+        var checked = values; checked["client_id"] = client; return checked
     }
 
     func signIn() async throws {
@@ -217,15 +254,8 @@ final class ChatGPTConnection {
         let opened = await MainActor.run { NSWorkspace.shared.open(url.url!) }
         guard opened else { throw AgentFailure("Could not open the sign-in browser.") }
         let response = try await listener.wait()
-        let items = URLComponents(url: response, resolvingAgainstBaseURL: false)?.queryItems ?? []
-        guard Set(items.map(\.name)).count == items.count else { throw AgentFailure("Duplicate OAuth callback parameters.") }
-        let values = Dictionary(uniqueKeysWithValues: items.map { ($0.name, $0.value ?? "") })
-        guard values["state"] == state else { throw AgentFailure("Sign-in state did not match. Try again.") }
-        guard values["error"] == nil else { throw AgentFailure("ChatGPT 로그인 또는 구독 사용 승인이 취소됐어요. Sign-in or plan access was declined.") }
-        let issuedClient = values["client_id"] ?? (previous?.clientID ?? "")
-        guard !issuedClient.isEmpty, issuedClient != "dynamic_agent_client",
-              previous == nil || issuedClient == previous?.clientID,
-              let code = values["code"], !code.isEmpty else { throw AgentFailure("Incomplete ChatGPT client registration.") }
+        let values = try Self.callbackValues(response, state: state, previousClient: previous?.clientID)
+        let issuedClient = values["client_id"]!, code = values["code"]!
         let token = try await tokenRequest(["grant_type": "authorization_code", "client_id": issuedClient,
             "code": code, "code_verifier": verifier, "redirect_uri": redirect, "resource": "https://api.openai.com/v1"])
         guard let idToken = token["id_token"] as? String else { throw AgentFailure("Missing ChatGPT ID token.") }
@@ -276,6 +306,13 @@ final class ChatGPTConnection {
         if stored.expiresAt > Date().addingTimeInterval(60) { return stored.accessToken }
         let token = try await tokenRequest(["grant_type": "refresh_token", "client_id": stored.clientID,
             "refresh_token": stored.refreshToken, "resource": "https://api.openai.com/v1"])
+        if let newIDToken = token["id_token"] as? String {
+            let (data, status) = try await http.send(URLRequest(url: URL(string: "https://auth.openai.com/.well-known/jwks.json")!))
+            guard status == 200, let keys = try JSONSerialization.jsonObject(with: data) as? [String: Any],
+                  try IDTokenValidator.validate(newIDToken, clientID: stored.clientID, nonce: nil, jwks: keys)["sub"] as? String == stored.subject else {
+                throw AgentFailure("Refreshed ChatGPT identity did not match.")
+            }
+        }
         let refreshed = try Self.makeAccount(token: token, clientID: stored.clientID,
             subject: stored.subject, email: stored.email, previous: stored)
         try SecretStore.write(JSONEncoder().encode(refreshed), name: credentialName)
