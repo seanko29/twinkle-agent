@@ -251,7 +251,8 @@ final class ChatGPTConnection {
         else { parameters["agent_name_hint"] = "Twinkle Agent" }
         var url = URLComponents(string: "https://auth.openai.com/api/accounts/authorize")!
         url.queryItems = parameters.map { URLQueryItem(name: $0.key, value: $0.value) }
-        let opened = await MainActor.run { NSWorkspace.shared.open(url.url!) }
+        let authorizationURL = url.url!
+        let opened = await MainActor.run { NSWorkspace.shared.open(authorizationURL) }
         guard opened else { throw AgentFailure("Could not open the sign-in browser.") }
         let response = try await listener.wait()
         let values = try Self.callbackValues(response, state: state, previousClient: previous?.clientID)

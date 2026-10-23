@@ -10,8 +10,8 @@ struct MailMessage: Codable, Equatable {
 enum MailConnection {
     // Static JXA is passed directly to osascript. Mail text is never executed or
     // interpolated into a script. Reading metadata/content does not mark mail read.
-    static let listScript = #"""
-    const mail = Application('Mail');
+    static let queryScript = #"""
+    function twinkleUnread(mail) {
     const messages = mail.inbox.messages.whose({readStatus: false});
     const ids = messages.id();
     const subjects = messages.subject();
@@ -25,8 +25,10 @@ enum MailConnection {
                  sender: String(senders[i] || '').slice(0, 500), received});
     }
     rows.sort((a, b) => ((Date.parse(b.received) || 0) - (Date.parse(a.received) || 0)) || b.id - a.id);
-    JSON.stringify(rows.slice(0, 50));
+    return rows.slice(0, 50);
+    }
     """#
+    static let listScript = queryScript + "\nJSON.stringify(twinkleUnread(Application('Mail')));"
 
     static func unread(using runner: ChildProcess) async throws -> [MailMessage] {
         let result = try await runner.run(executable: URL(fileURLWithPath: "/usr/bin/osascript"),
