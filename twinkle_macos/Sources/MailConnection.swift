@@ -12,16 +12,20 @@ enum MailConnection {
     // interpolated into a script. Reading metadata/content does not mark mail read.
     static let listScript = #"""
     const mail = Application('Mail');
-    const messages = mail.inbox.messages.whose({readStatus: false})();
+    const messages = mail.inbox.messages.whose({readStatus: false});
+    const ids = messages.id();
+    const subjects = messages.subject();
+    const senders = messages.sender();
+    const dates = messages.dateReceived();
     const rows = [];
-    for (let i = 0; i < Math.min(messages.length, 50); i++) {
-      const m = messages[i];
+    for (let i = 0; i < ids.length; i++) {
       let received = '';
-      try { received = m.dateReceived().toISOString(); } catch (_) {}
-      rows.push({id: m.id(), subject: String(m.subject() || '').slice(0, 500),
-                 sender: String(m.sender() || '').slice(0, 500), received});
+      try { received = dates[i].toISOString(); } catch (_) {}
+      rows.push({id: ids[i], subject: String(subjects[i] || '').slice(0, 500),
+                 sender: String(senders[i] || '').slice(0, 500), received});
     }
-    JSON.stringify(rows);
+    rows.sort((a, b) => ((Date.parse(b.received) || 0) - (Date.parse(a.received) || 0)) || b.id - a.id);
+    JSON.stringify(rows.slice(0, 50));
     """#
 
     static func unread(using runner: ChildProcess) async throws -> [MailMessage] {

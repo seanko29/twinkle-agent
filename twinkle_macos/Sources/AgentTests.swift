@@ -104,6 +104,19 @@ func runAgentTests() async throws {
     let child = ChildProcess()
     let process = try await child.run(executable: URL(fileURLWithPath: "/bin/cat"), arguments: [], input: Data("synthetic input".utf8))
     try verify(process.status == 0 && process.data == Data("synthetic input".utf8), "direct subprocess stdin/stdout")
+    let mailFixture = #"""
+    function Application(name) {
+      return {inbox: {messages: {whose: function(query) { return {
+        id: function() { return [10, 20]; }, subject: function() { return ['old', 'new']; },
+        sender: function() { return ['test@example.test', 'test@example.test']; },
+        dateReceived: function() { return [new Date('2026-01-01'), new Date('2026-10-23')]; }
+      }; }}}};
+    }
+    """#
+    let scriptResult = try await ChildProcess().run(executable: URL(fileURLWithPath: "/usr/bin/osascript"),
+        arguments: ["-l", "JavaScript", "-e", mailFixture + "\n" + MailConnection.listScript])
+    let mailRows = try JSONDecoder().decode([MailMessage].self, from: scriptResult.data)
+    try verify(scriptResult.status == 0 && mailRows.map(\.id) == [20, 10], "production JXA metadata query sorts newest first against a fake Mail object")
     let listener = OAuthCallback(); let port = try await listener.start()
     let waiting = Task { try await listener.wait() }
     let url = URL(string: "http://127.0.0.1:\(port)/auth/callback?code=test&state=s&client_id=oaiapp_test")!
