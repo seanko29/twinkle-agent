@@ -4,7 +4,7 @@ A small Windows / macOS desktop companion that wanders quietly, cheers you on, a
 
 <a href="README.ko.md"><img src="docs/kor.svg" alt="한국어 안내" width="76" height="32"></a> <a href="README.en.md"><img src="docs/eng.svg" alt="English guide" width="76" height="32"></a>
 
-[**KOR / ENG user guide**](https://seanko29.github.io/twinkle-agent/) · [**Windows downloads**](https://github.com/seanko29/twinkle-agent/releases/latest) · [Image gallery](https://seanko29.github.io/twinkle-agent/twinkle_twinkle/)
+[**KOR / ENG user guide**](https://seanko29.github.io/twinkle-agent/) · [**Windows downloads**](https://github.com/seanko29/twinkle-agent/releases/tag/v0.8.0) · [Image gallery](https://seanko29.github.io/twinkle-agent/twinkle_twinkle/)
 
 ![Strawberry-hat walking preview](twinkle_desktop/walk_preview.gif)
 
@@ -13,7 +13,7 @@ A small Windows / macOS desktop companion that wanders quietly, cheers you on, a
 The native macOS 12+ app supports roaming, drag movement, activity timers, 47 animations, personal image import, and menu bar controls. Its UI switches between Korean and English.
 
 - [Mac installation, controls, builds, and signing](docs/macOS.md)
-- [macOS builds and downloads](https://github.com/seanko29/twinkle-agent/actions/workflows/macos.yml): open a successful run and download its DMG/ZIP artifact. Sign-in required; 30-day retention.
+- [Download macOS 0.10.0 preview](https://github.com/seanko29/twinkle-agent/releases/tag/v0.10.0): download the universal DMG/ZIP from Releases. No GitHub sign-in is required.
 - One universal app includes Apple Silicon and Intel code. CI executes it on both kinds of Mac.
 - Current downloads are ad-hoc signed previews without Developer ID signing or notarization. The build script also supports the general-distribution signing path.
 - Mac connects Apple Mail with a ChatGPT plan or official Claude Code for summaries and next actions. See [Mail and subscription AI setup](docs/Mail-AI.md). The browser notification bridge remains Windows-only; Windows AI summaries are not implemented.

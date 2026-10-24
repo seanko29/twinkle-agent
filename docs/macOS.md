@@ -4,7 +4,7 @@ Twinkle Agent 0.10.0 preview adds a native AppKit companion for **macOS 12+**, w
 
 ## 한국어 · 설치
 
-1. 저장소의 **Actions → macOS app**에서 성공한 실행을 엽니다. 아래 **Artifacts**의 `TwinkleAgent-macOS-macos-15`를 받습니다. GitHub 로그인이 필요하며 파일은 30일간 보관됩니다. 일반 Releases 배포는 아직 하지 않았습니다.
+1. [macOS 0.10.0 시험 버전 Releases](https://github.com/seanko29/twinkle-agent/releases/tag/v0.10.0)의 **Assets**에서 `TwinkleAgent_macOS_universal.dmg` 또는 앱 ZIP을 받습니다. GitHub 로그인 없이 다운로드할 수 있습니다.
 2. 받은 파일에서 `TwinkleAgent_macOS_universal.dmg`를 열고 `Twinkle Agent.app`을 **Applications** 폴더로 드래그합니다. 또는 앱 ZIP을 압축 해제해 응용 프로그램 폴더에 넣습니다.
 3. 앱을 실행하면 캐릭터와 메뉴 막대의 **✦** 아이콘이 나타납니다. Dock에는 별도 아이콘이 생기지 않습니다.
 4. 캐릭터 클릭/우클릭 또는 ✦ 메뉴에서 모드를 고릅니다. Mac UI도 **한국어 / English**를 전환할 수 있습니다.
@@ -32,7 +32,7 @@ Twinkle Agent 0.10.0 preview adds a native AppKit companion for **macOS 12+**, w
 
 ## English · install and use
 
-1. Open a successful **Actions → macOS app** run and download the `TwinkleAgent-macOS-macos-15` artifact. GitHub sign-in is required; artifacts expire after 30 days. This preview has not been published to Releases.
+1. Open the [macOS 0.10.0 preview Release](https://github.com/seanko29/twinkle-agent/releases/tag/v0.10.0) and download `TwinkleAgent_macOS_universal.dmg` or the app ZIP from **Assets**. No GitHub sign-in is required.
 2. Open `TwinkleAgent_macOS_universal.dmg` and drag **Twinkle Agent.app** to **Applications**, or extract the app ZIP there.
 3. Launch the app. Look for the character and the **✦** menu bar icon; there is no Dock icon.
 4. Click/right-click the character or use ✦ for activities, pause/resume, sizing, image selection, hide/show, language, and quit. Drag to move. Control or Command + scroll resizes.
