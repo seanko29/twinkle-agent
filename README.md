@@ -1,12 +1,29 @@
 # Twinkle Agent ✦
 
-바탕 화면을 조용히 돌아다니는 Windows용 트윙클 친구입니다. 집중·휴식·회의·퇴근에 맞춰 표정을 바꾸고, 원본 이미지 갤러리에서 원하는 모습을 고를 수 있습니다.
+바탕 화면을 조용히 돌아다니는 Windows / macOS용 트윙클 친구입니다. 집중·휴식·회의·퇴근에 맞춰 표정을 바꾸고, 원본 이미지 갤러리에서 원하는 모습을 고를 수 있습니다.
 
 <a href="README.ko.md"><img src="docs/kor.svg" alt="한국어 안내" width="76" height="32"></a> <a href="README.en.md"><img src="docs/eng.svg" alt="English guide" width="76" height="32"></a>
 
-[**KOR / ENG 사용 안내**](https://seanko29.github.io/twinkle-agent/) · [**Windows 다운로드**](https://github.com/seanko29/twinkle-agent/releases/latest) · [이미지 갤러리](https://seanko29.github.io/twinkle-agent/twinkle_twinkle/)
+[**KOR / ENG 사용 안내**](https://seanko29.github.io/twinkle-agent/) · [**Windows 다운로드**](https://github.com/seanko29/twinkle-agent/releases/tag/v0.8.0) · [이미지 갤러리](https://seanko29.github.io/twinkle-agent/twinkle_twinkle/)
 
 ![딸기 모자 걷기](twinkle_desktop/walk_preview.gif)
+
+## macOS 시험 배포 · Apple Silicon / Intel
+
+macOS 12 이상에서 실행하는 네이티브 앱을 추가했습니다. 캐릭터 이동·드래그·집중/휴식/회의 타이머·47개 이미지 선택·개인 이미지 추가·메뉴 막대를 지원합니다. Mac UI도 한국어/영어를 전환할 수 있습니다. 0.10.0 preview부터 메일·구독 AI 도우미를 포함합니다.
+
+- [Mac 설치·조작·빌드·서명 안내](docs/macOS.md)
+- [macOS 0.10.0 시험 버전 다운로드](https://github.com/seanko29/twinkle-agent/releases/tag/v0.10.0): Releases에서 universal DMG/ZIP을 받습니다. GitHub 로그인 없이 다운로드할 수 있습니다.
+- 하나의 universal 앱에 Apple Silicon과 Intel 코드를 함께 포함합니다. CI는 두 종류의 Mac에서 각각 실행합니다.
+- 현재는 Apple Developer ID 서명·공증 전 시험 배포본입니다. 일반 배포용 서명·공증 경로도 빌드 스크립트에 준비되어 있습니다.
+- Mac은 Apple Mail + ChatGPT 구독 / Claude Code를 연결해 메일 요약과 할 일 추출을 지원합니다. [메일·구독 AI 연결 안내](docs/Mail-AI.md). Chrome/Edge 완료 알림은 Windows 전용이며 Windows AI 요약은 미구현입니다.
+
+```bash
+# macOS + Xcode Command Line Tools + Python 3
+bash scripts/build_macos.sh
+```
+
+아래 설치·연결 설명은 **기존 Windows 버전**에 해당합니다.
 
 ## 설치와 조작
 
@@ -55,6 +72,7 @@ python scripts/package.py --inno "C:\Program Files (x86)\Inno Setup 6\ISCC.exe"
 |---|---|
 | `index.html` | KOR / ENG 전환 사용 안내 |
 | `twinkle_twinkle/` | 47개 원본 애니메이션, 555개 프레임, 갤러리와 출처 목록 |
+| `twinkle_macos/` | macOS AppKit 앱, universal 빌드·설치 안내 |
 | `twinkle_desktop/src/` | WPF 앱·이미지 디코더·메일·로컬 알림·설치 소스 |
 | `twinkle_desktop/browser_extension/` | 선택형 Chrome/Edge 완료 알림 확장 |
 | `scripts/` | 빌드·개인정보 검사·공개 패키징 |

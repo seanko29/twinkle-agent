@@ -32,3 +32,9 @@ bin/
 obj/
 Thumbs.db
 .DS_Store
+*.app/
+*.dmg
+*.icns
+*.xcuserstate
+**/xcuserdata/
+**/assistant.json

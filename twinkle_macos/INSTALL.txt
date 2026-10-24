@@ -1,0 +1,51 @@
+Twinkle Agent · macOS preview 0.10.0
+Apple Silicon / Intel · macOS 12 Monterey or later
+
+한국어
+1. DMG를 열고 Twinkle Agent.app을 Applications 폴더로 드래그하세요.
+2. 응용 프로그램 폴더에서 실행하세요. 메뉴 막대의 ✦ 아이콘이 나타납니다.
+3. 캐릭터 클릭/우클릭: 집중·휴식·회의·퇴근, 일시정지, 이미지 선택.
+4. 드래그로 이동, Control 또는 Command + 스크롤로 크기 조절.
+5. 메뉴 막대 ✦에서 숨기기/보이기, 한국어/English, 사용법, 종료.
+6. 설정과 개인 이미지는 ~/Library/Application Support/TwinkleAgent/에 보존됩니다.
+
+이 시험 배포본은 임시(ad-hoc) 서명이며 Apple Developer ID 서명·공증을 받지 않았습니다.
+인터넷에서 다운로드하면 macOS의 보안 확인에 의해 실행이 차단될 수 있습니다.
+출처를 확인한 앱에 한해 시스템 설정 > 개인정보 보호 및 보안에서 제공되는
+앱별 '확인 없이 열기' 절차를 사용할 수 있습니다. 조직 정책에 따라 허용되지 않을 수 있습니다.
+일반 사용자 배포에는 Developer ID 서명과 Apple 공증이 필요합니다.
+
+✦ → 메일 · AI 도우미에서 Mail 앱 계정과 AI를 연결하세요.
+ChatGPT: Continue with ChatGPT → 로그인 및 구독 사용 승인 → 모델 선택.
+Claude: 공식 Claude Code를 설치하고 Claude Code 로그인 → 연결 확인.
+안 읽은 메일 가져오기 → Mail 자동화 접근 허용 → 메일 1~5개 선택 → 요약.
+선택한 본문은 해당 AI 서비스로 전송됩니다. 본인 구독/크레딧/API 사용량이 적용됩니다.
+메일 확인·자동 요약은 별도 옵션이며 기본 꺼짐입니다. 메일 발송 기능은 없습니다.
+메일 비밀번호는 Mail 앱이 관리하고, ChatGPT 토큰은 Keychain에 저장합니다.
+Chrome/Edge 완료 알림은 Windows 전용입니다. 실제 계정 로그인·수신·요약은 Mac에서 추가 확인이 필요합니다.
+실제 Mac의 다중 화면·전체 화면 전환·절전 복귀는 추가 사용 확인이 필요합니다.
+
+English
+1. Open the DMG and drag Twinkle Agent.app to Applications.
+2. Launch from Applications. Look for the ✦ menu bar icon.
+3. Click/right-click the character for activities, pause/resume, and image selection.
+4. Drag to move. Control or Command + scroll resizes the character.
+5. Use ✦ to hide/show, change language, open the guide, or quit.
+6. Preferences and imports stay in ~/Library/Application Support/TwinkleAgent/.
+
+This preview is ad-hoc signed, without an Apple Developer ID signature or notarization.
+macOS may block a downloaded copy. For an app whose source you trust, follow the
+per-app Open Anyway procedure in System Settings > Privacy & Security, if available.
+Managed devices may disallow this. General distribution requires Developer ID signing
+and Apple notarization. Do not disable Gatekeeper globally.
+
+Open ✦ → Mail & AI assistant. Add accounts in Apple Mail and allow Automation access.
+Use Continue with ChatGPT and authorize plan usage, or install and sign in to official Claude Code.
+Load unread mail, select 1–5 messages, and summarize. Selected bodies go to your chosen AI;
+your plan/credit/API limits and billing apply. Polling and automatic summaries are off by default.
+Mail is never sent or marked read. Mail owns mail credentials; ChatGPT tokens stay in Keychain.
+Browser completion signals remain Windows-only. Live account flows need user verification on a Mac.
+Physical-Mac testing of multiple monitors, full-screen spaces, and sleep/wake is still needed.
+
+Source / 소스: https://github.com/seanko29/twinkle-agent
+Third-party artwork / 이미지 권리: ASSET_NOTICE.md

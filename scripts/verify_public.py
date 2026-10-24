@@ -27,7 +27,7 @@ def verify_files(files):
         data=path.read_bytes()
         for index,pattern in enumerate(SECRET_PATTERNS):
             if pattern.search(data):failures.append(f'potential credential/local path pattern {index+1}: {rel}')
-        if 'third_party' not in rel.parts and path.suffix.lower() in {'.cs','.py','.ps1','.js','.json','.txt','.md','.html','.csv','.yml','.yaml','.xml','.config'}:
+        if 'third_party' not in rel.parts and path.suffix.lower() in {'.cs','.swift','.sh','.plist','.py','.ps1','.js','.json','.txt','.md','.html','.csv','.yml','.yaml','.xml','.config'}:
             emails=re.findall(rb'[A-Za-z0-9_.+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}',data)
             for email in emails:
                 if not email.endswith((b'@example.test',b'@example.com',b'@example.invalid',b'@users.noreply.github.com')):
